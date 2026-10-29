@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Retrieve
+{% endblock title %}
+
+
+
+{% block content %}
+
+        <!--- div for responsive card log -->
+        <h1 class="text-3xl font-bold p-5 pt-10 mb-10" align="center"> Retrieve Logs </h1>
+
+        <div class="grid w-full grid-cols-1 items-start gap-6 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-10 lg:pr-25  lg:pl-8">
+
+            <!--filter box -->
+            <div class="order-1 flex w-full justify-center lg:order-2 lg:justify-start mb-15 ">
+                <div class="card w-full max-w-md bg-[#e8e6f2] p-6 shadow-2xl lg:w-196 lg:max-w-none lg:sticky lg:top-5">
+
+
+                    <fieldset class="fieldset">
+
+                        <form method="POST" enctype="multipart/form-data" action="">
+                            {% csrf_token %}
+                            <h1 class="text-xl font-bold mb-5 mt-3" align="center"> Filter </h1>
+
+                            <label for="startDate">Choose Start Date for Range</label>
+                            <input id="startDate" type="date" class="input input-bordered w-full  mb-5" name="startDate" required/><br>
+
+                            <label for="endDate">Choose End Date for Range</label>
+                            <input id="endDate" type="date" class="input input-bordered w-full  mb-5" name="endDate" required/>
+
+                            <div class="justify-center flex items-center">
+                                <button class="btn btn-primary m-5">Submit Filter</button>
+
+                            </div>
+
+
+                            <div class="justify-center flex items-center">
+                            <button class="btn btn-secondary m-3" type="submit" formaction="{% url 'retrieve_pdf' %}" formtarget="_blank">
+                                    Retrieve PDF
+                            </button>
+                            </div>
+
+                        </form>
+
+                    </fieldset>
+                </div>
+            </div>
+
+            <!-- data table -->
+            <div class="order-2 flex min-w-0 w-full justify-center lg:order-1">
+
+                    <div class=" w-full max-w-6xl ">
+                    <!--Custom Dates-->
+                    <div class="card w-full max-w-6xl bg-[#e8e6f2] p-4 shadow-2xl sm:p-6">
+                    <div class="overflow-x-auto rounded-box " >
+                        <h1 class="text-2xl font-bold" align="center"> Custom Dates </h1>
+                        <table class="table table-lg table-pin-rows table-pin-cols p-5">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <td>Name</td>
+                                <td>Date</td>
+                                <td>Time</td>
+                                <td>Station</td>
+                                <td>Result</td>
+                                <td>Verification</td>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for record in filteredData %}
+                                    <tr>
+                                        <td> {{ forloop.counter }}</td>
+                                        <td>
+                                            {% if not record.otherUser %}
+                                                {{record.username}}
+                                            {% else %}
+                                                {{record.otherUser}}
+                                            {% endif %}
+
+                                        </td>
+                                        <td> {{record.date}} </td>
+                                        <td> {{record.time}} </td>
+                                        <td> {{record.station}} </td>
+                                        <td> {{record.testResult}} </td>
+                                        <td>
+                                            {% if record.verification_initials == None %}
+                                                Not Verified
+                                            {% else %}
+                                                {{record.verification_initials}}
+                                            {% endif %}
+                                        </td>
+
+                                    </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div> <br> <br>
+
+
+                    <!--Last 7 Days -->
+                    <div class="card w-full max-w-6xl bg-[#e8e6f2] p-4 shadow-2xl sm:p-6">
+
+                        <div class="overflow-x-auto rounded-box " >
+                            <h1 class="text-2xl font-bold" align="center"> Last 7 Days </h1>
+                            <table class="table table-lg table-pin-rows table-pin-cols p-5">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <td>Name</td>
+                                    <td>Date</td>
+                                    <td>Time</td>
+                                    <td>Station</td>
+                                    <td>Result</td>
+                                    <td>Verification</td>
+                                    <th></th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for record in recentData %}
+                                    <tr>
+                                        <td> {{ forloop.counter }}</td>
+                                        <td>
+                                            {% if not record.otherUser %}
+                                                {{record.username}}
+                                            {% else %}
+                                                {{record.otherUser}}
+                                            {% endif %}
+
+                                        </td>
+                                        <td> {{record.date}} </td>
+                                        <td> {{record.time}} </td>
+                                        <td> {{record.station}} </td>
+                                        <td> {{record.testResult}} </td>
+                                        <td>
+                                            {% if record.verification_initials == None %}
+                                                Not Verified
+                                            {% else %}
+                                                {{record.verification_initials}}
+                                            {% endif %}
+                                        </td>
+
+                                    </tr>
+
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                    </div>
+
+            </div>
+        </div>
+
+
+
+{% endblock content %}

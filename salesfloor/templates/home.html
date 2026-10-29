@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}
+    ESD Log
+{% endblock title %}
+
+
+
+{% block content %}
+
+        <!--- div for responsive card log -->
+        <div class="flex items-center justify-center pt-15 ">
+            <div class="card pl-10 pr-10 pt-9 max-w-xl shrink-0 shadow-2xl bg-[#e8e6f2]">
+                <div class="card-body w-full">
+                    <fieldset class="fieldset">
+                        <form method="POST" enctype="multipart/form-data" action="">
+                            {% csrf_token %}
+                            <h1 class="text-2xl font-bold" align="center"> Log Test </h1>
+
+                            <br>
+
+                             <!--- div for responsive card log -->
+                            <label for="username"> Name</label>
+                                <select id="username" class="select select-bordered w-full  mb-5"  name="username" required>
+                                    <option disabled selected>Choose User</option>
+                                    <option>Brian Watson</option>
+                                    <option>Scott Baker</option>
+                                    <option>Danny Houang</option>
+                                    <option>Lily Neil</option>
+                                    <option>Nirag Jadav</option>
+                                    <option>Chelsi Grasteit</option>
+                                    <option>Mukesh Lad</option>
+                                     <option>Other</option>
+                                </select>
+
+                            <label for="otherUser">New User</label>
+                            <input id="otherUser" type="input" class="input input-bordered w-full  mb-5" name="otherUser" placeholder="Leave blank if your name is listed above"/>
+
+                            <label for="date">Date</label>
+                            <input id="date" type="date" class="input input-bordered w-full  mb-5" name="date" required/>
+
+                            <label for="time">Time</label>
+                            <input id="time" type="time" class="input input-bordered w-full mb-5" name="time" required/>
+
+                            <label for="station">Station</label>
+                            <select id="station" class="select select-bordered w-full mb-5" name="station" required>
+                                <option value="" disabled selected>Choose Station</option>
+                                <option value="1F (Taping Reel 1 - Front)">1F (Taping Reel 1 - Front)</option>
+                                <option value="3F (Taping Reel 2 - Front)">3F (Taping Reel 2 - Front)</option>
+                                <option value="4F (BGA Rework - Front)">4F (BGA Rework - Front)</option>
+                                <option value="7R (Taping Reel 1 - Back)">7R (Taping Reel 1 - Back)</option>
+                                <option value="7R (Taping Reel 2 - Back)">7R (Taping Reel 2 - Back)</option>
+                                <option value="7R (Taping Reel 3 - Back)">7R (Taping Reel 3 - Back)</option>
+                                <option value="4R (Taping Reel 4 - Back)">4R (Taping Reel 4 - Back)</option>
+                                <option value="F1 (Forming 1)">F1 (Forming 1)</option>
+                                <option value="F2 (Forming 2)">F2 (Forming 2)</option>
+                                <option value="3R (Washing)">3R (Washing)</option>
+                                <option value="2R (VWR)">2R (VWR)</option>
+                                <option value="2R1 (Blue Baking Oven)">2R1 (Blue Baking Oven)</option>
+                                <option value="6R (Hakko 1)">6R (Hakko 1)</option>
+                                <option value="6R (Hakko 2)">6R (Hakko 2)</option>
+                                <option value="6R (Hakko 3)">6R (Hakko 3)</option>
+                                <option value="6R (Hakko 4)">6R (Hakko 4)</option>
+                                <option value="Engineering/Technology Table">Engineering/Technology Table</option>
+                                <option value="Steamaging Test Machine">Steamaging Test Machine</option>
+                                <option value="PC-250">PC-250</option>
+                                <option value="LSM (Laser Section Microscope)">LSM (Laser Section Microscope)</option>
+                                <option value="5R (BGA Reballing)">5R (BGA Reballing)</option>
+                                <option value="Sikama 5 (Falcon 5)">Sikama 5 (Falcon 5)</option>
+                                <option value="Engineering Bench">Engineering Bench</option>
+                                <option value="Sikama 5C (Falcon 5C)">Sikama 5C (Falcon 5C)</option>
+                                <option value="Other">Other</option>
+                            </select>
+
+                            <label for="testresult">Result</label>
+                            <select id="testresult" class="select select-bordered w-full mb-5" name="testResult" required>
+                              <option value="" disabled selected>Choose Result</option>
+                              <option value="Pass">Pass</option>
+                              <option value="Fail">Fail</option>
+                                <option value="N/A">N/A</option>
+                            </select>
+
+                            <div class="justify-center flex items-center">
+                            <button class="btn btn-primary m-5">Submit Log</button>
+                            </div>
+
+                        </form>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}

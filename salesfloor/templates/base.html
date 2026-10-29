@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html data-theme="cmyk">
+
+    <head>
+        <meta charset="UTF-8">
+
+        <title>
+          {% block title %}
+          {% endblock title %}
+        </title>
+
+        {% load static %}
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link href="https://cdn.jsdelivr.net/combine/npm/daisyui@5/base/rootcolor.css,npm/daisyui@5/base/rootscrolllock.css,npm/daisyui@5/base/scrollbar.css,npm/daisyui@5/base/reset.css,npm/daisyui@5/base/properties.css,npm/daisyui@5/base/rootscrollgutter.css,npm/daisyui@5/base/svg.css,npm/daisyui@5/components/button.css,npm/daisyui@5/components/menu.css,npm/daisyui@5/components/checkbox.css,npm/daisyui@5/components/input.css,npm/daisyui@5/components/toggle.css,npm/daisyui@5/components/select.css,npm/daisyui@5/theme/light.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+
+    <body>
+
+      {% if messages %}
+          {% for message in messages %}
+              <div class="toast">
+                  <div class="alert alert-info">
+                      <span>{{ message }}</span>
+                      <button class="btn btn-ghost btn-sm" onclick="this.closest('.toast').style.display='none'">✕</button>
+                  </div>
+              </div>
+
+          {% endfor %}
+      {% endif %}
+
+          <!--- div for responsive title -->
+      <div class="navbar bg-base-100 shadow-lg pl-10 pr-10 p-5" >
+              <div class="navbar-start relative">
+                  <div class="dropdown">
+                      <div tabindex="0" role="button", class="btn btn-ghost btn-circle">
+                          <svg style="" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>
+                      </div>
+
+                          <ul
+                              tabindex="-1"
+                              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                              <li><a href="{% url 'home' %}">Home</a></li>
+                              <li><a href="{% url 'verify' %}">Verify</a></li>
+                              <li><a href="{% url 'retrieve' %}">Retrieve</a></li>
+                          </ul>
+
+
+                  </div>
+              </div>
+              <div class="navbar-center absolute left-1/2 -translate-x-1/2">
+
+                  <h1 class="font-bold text-3xl m-5 pt-5 pb-5">ESD Test Logger</h1>
+
+              </div>
+
+
+      </div> <br>
+
+      {% block content %}
+      {% endblock content %}
+    </body>
+</html>

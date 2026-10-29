@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Verify
+{% endblock title %}
+
+
+
+{% block content %}
+
+        <!--- div for responsive card log -->
+        <div class="flex items-center justify-center pt-15 ">
+            <div class="card pl-10 pr-10  max-w-xl shrink-0 shadow-2xl bg-[#e8e6f2]">
+                <div class="card-body w-full">
+
+
+                    <fieldset class="fieldset">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <h1 class="text-2xl font-bold m-5" align="center"> Verify Logs </h1>
+
+                            <br>
+
+                            <label for="date">Choose Date to Verify</label>
+                            <input id="date" type="date" class="input input-bordered w-full  mb-5" name="date" required/>
+
+                            <div class="justify-center flex items-center">
+                                <button class="btn btn-primary m-5" type="submit" value="checkLogs" name="action">Confirm Day</button>
+                            </div>
+
+                        </form>
+                    </fieldset>
+
+
+
+                    <div class="justify-center flex items-center">
+                        <label class="">{{logsText}}</label>
+                    </div>
+
+
+                    <fieldset class="fieldset">
+
+                        <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                            <input hidden="hidden" value={{date}} name="date"/>
+
+                            <label for="otherUser">Verification Initial</label>
+                            <input id="otherUser" type="input" class="input input-bordered w-full  mb-5" name="initials" placeholder="Enter your initials"/>
+
+                            <div class="justify-center flex items-center">
+                                <button class="btn btn-primary m-5" type="submit" value="verifyLogs" name="action">Verify Log</button>
+                            </div>
+                        </form>
+                    </fieldset>
+
+
+
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}
