@@ -1,6 +1,6 @@
 from calendar import weekday
 from pathlib import Path
-from xxlimited_35 import Null
+
 
 from django.shortcuts import render, redirect
 from django.contrib.messages import constants as messages
@@ -246,7 +246,7 @@ def retrieve_pdf(request):
 
 def verify(request):
     logsText = ""
-    requestDate = Null
+    requestDate = None
     if request.method == "POST":
         logsText = ""
         if request.POST.get("action") == "checkLogs":
@@ -272,7 +272,7 @@ def verify(request):
 
 
     else:
-        return render(request, "verify.html", {"logsText": "", "date": Null})
+        return render(request, "verify.html", {"logsText": "", "date": None})
 
 #next step to make a git repo or git lab for deployment in render or vercel
 #internal url - postgresql://esdapp_user:JN58xpE8snEEVSrjQtSQEkvuXNBOwMBD@dpg-dbgcuh7avr4c73dluv60-a/esdapp
