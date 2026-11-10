@@ -79,9 +79,12 @@ WSGI_APPLICATION = 'esdapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://neondb_owner:npg_dGO7hnTAR6tJ@ep-bitter-night-arvc4bkb-pooler.c-4.us-west-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
+    )
+}
 
-DATABASE_URL="postgresql://neondb_owner:********@ep-bitter-night-arvc4bkb.c-4.us-west-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
-DATABASE_URL_POOLED="postgresql://neondb_owner:********@ep-bitter-night-arvc4bkb-pooler.c-4.us-west-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 
 
 # Password validation
