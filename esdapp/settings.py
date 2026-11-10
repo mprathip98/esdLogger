@@ -76,39 +76,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'esdapp.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.1/ref/settings/#databases
-
 import os
-from urllib.parse import urlparse
+import dj_database_url
 
-# Fetch the variable directly from Render's environment
-db_url = os.environ.get("DATABASE_URL")
+SECRET_KEY = os.environ["SECRET_KEY"]
 
-if db_url:
-    parsed = urlparse(db_url)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': parsed.path.lstrip('/'),
-            'USER': parsed.username,
-            'PASSWORD': parsed.password,
-            'HOST': parsed.hostname,
-            'PORT': parsed.port or 5432,
-            'OPTIONS': {
-                'sslmode': 'require',
-            },
-        }
-    }
-else:
-    # Fallback placeholder so Django doesn't crash if the variable is missing locally
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'postgres',
-        }
-    }
-
+DATABASES = {
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL", ""),
+        conn_max_age=600,
+        ssl_require=True,
+    )
+}
 
 
 # Password validation
